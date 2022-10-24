@@ -1,92 +1,158 @@
 /*
-* This is a program that calculates the pop
-* from JacksonStack
+* This is a program that gets the Vehicle status
+* from Vehicle to carStatus
 *
 * @author  Jackson Naufal
 * @version 1.0
-* @since   2022-10-08
+* @since   2022-10-24
 */
 
-import java.util.ArrayList;
 /**
- * This is the class for JacksonStacks.
- * Make class JacksonStacks.
+ * This is the class for Vehicle.
+ * Make class Vehicle.
  */
 
-public class JacksonStacks {
+public class Vehicle {
 
     /**
-    * This is an array that is private in this class
-    * and can not be modified elsewhere, it only
-    * takes number inputted in Main.
+     * This is the speed.
+     */
+    private int speed;
+
+    /**
+     * This is the licensePlate.
+     */
+    private String licensePlate;
+
+    /**
+    * This is the color.
     */
-    private ArrayList<Integer> stackNum = new ArrayList<Integer>();
+    private String color;
 
     /**
-    * This is getter
-    * getStack().
-    *
-    * @return stackNum this is the list of numbers.
-    */
-    public ArrayList<Integer> getStack() {
-        return stackNum;
-    }
+     * This is the maxSpeed.
+     */
+    private int maxSpeed;
 
     /**
-     * This adds numbers to the stack.
+     * This is the doorNum.
+     */
+    private int doorNum;
+
+    /**
+     * This is the Vehicle Constructor.
      *
-     * @param userInt this number is added to the array.
-     */
-    public void push(int userInt) {
-        stackNum.add(userInt);
-    }
-
-    /**
-    * This is the pop stack.
-    *
-    * @return stackNum this is the new popped number.
-    */
-    public int pop() {
-        final int quantity = stackNum.size();
-        final int poppedItem;
-        if (stackNum.isEmpty()) {
-            poppedItem = -1;
-            System.out.println("Nothing In Stack!");
-        } else {
-            poppedItem = (int) stackNum.get(quantity - 1);
-            stackNum.remove(quantity - 1);
-        }
-        return poppedItem;
-    }
-
-    /**
-     * This is a peak function.
+     * @param color The vehicles color.
+     * @param licensePlate The vehicles license plate.
+     * @param doorNum The vehicles number of doors.
+     * @param maxSpeed The vehicles max speed.
      *
-     * @return peakItem this is the top number in a stack.
      */
-    public int peak() {
-        final int quantity = stackNum.size();
-        final int peakItem;
-        if (stackNum.isEmpty()) {
-            peakItem = 0;
-            System.out.println("Number were popped! No peak!");
-        } else {
-            peakItem = (int) stackNum.get(quantity - 1);
+    public Vehicle(
+        String color,
+        String licensePlate,
+        int doorNum,
+        int maxSpeed) {
+        this.color = color;
+        this.licensePlate = licensePlate;
+        this.doorNum = doorNum;
+        this.maxSpeed = maxSpeed;
+    }
+
+    /**
+     * This returns the licensePlate.
+     *
+     * @return this returns the licensePlate.
+     */
+    public String getLicensePlate() {
+        return this.licensePlate;
+    }
+
+    /**
+     * This sets the licensePlate.
+     *
+     * @param licensePlateNew this is the new variable.
+     */
+    public void setLicensePlate(String licensePlateNew) {
+        this.licensePlate = licensePlateNew;
+    }
+
+    /**
+     * This returns the color.
+     *
+     * @return this returns the color.
+     */
+    public String getColor() {
+        return this.color;
+    }
+
+    /**
+     * This gets the color.
+     *
+     * @param setColorNew this is the new variable.
+     */
+    public void setColor(String setColorNew) {
+        this.color = setColorNew;
+    }
+
+    /**
+     * This gets the door number.
+     *
+     * @return this returns the door number.
+     */
+    public int getDoorNum() {
+        return this.doorNum;
+    }
+
+    /**
+     * This gets the speed.
+     *
+     * @return this returns the speed.
+     */
+    public int getSpeed() {
+        return this.speed;
+    }
+
+    /**
+     * This sets the status.
+     */
+    public void status() {
+        System.out.println(" ---> Speed: " + this.speed);
+        System.out.println(" ---> MaxSpeed: " + this.maxSpeed);
+        System.out.println(" ---> Number Of Doors " + this.doorNum);
+        System.out.println(" ---> License Plate: " + this.licensePlate);
+        System.out.println(" ---> Color: " + this.color);
+    }
+
+    /**
+     * Acceleration function
+     * This calculates the acceleration speed.
+     *
+     * @param accelerationPower this is the acceleration power.
+     * @param accelerationTime this is the acceleration time.
+     *
+     */
+    public void accelerate(int accelerationPower, int accelerationTime) {
+        this.speed = (accelerationPower * accelerationTime) + this.speed;
+
+        if (speed > maxSpeed) {
+            this.speed = maxSpeed;
         }
-        return peakItem;
     }
 
     /**
-     * This is a clear function.
+     * Breaking function
+     * This calculates the breaking speed.
+     *
+     * @param breakPower this is the breaking power.
+     * @param breakTime this is the break time.
+     *
      */
-    public void clearedArray() {
-        stackNum.clear();
-    }
+    public void breaking(int breakPower, int breakTime) {
+        this.speed = this.speed - (breakPower * breakTime);
 
-    /**
-    * This is the final stack.
-    */
-    public void finishedStack() {
-        System.out.println(stackNum);
+        if (this.speed < 0) {
+            this.speed = 0;
+        }
     }
 }
